@@ -31,7 +31,7 @@ Class Model{
     private function invokeModel(){
         
         $cfg = \ActiveRecord\Config::instance();
-        $cfg->set_model_directory($this->registry->appDir.'/model/');
+        $cfg->set_model_directory($this->registry->appDir.'/models/');
         $cfg->set_connections($this->connections);
         $cfg->set_default_connection($this->defaultConnection);
     }
