@@ -124,6 +124,8 @@ Class Example extends \KMF\Controller{
   
     $params = $this->dispatcher->getParams(); // Get all the request passed through URL i.e $_GET
     $menu = $this->menu(); // Get all menu configured in config.ini file
+    
+    //If no action is mentioned it redirect to index() of controller & params can be null
     $url = $this->url(
               array(
                 'controller' => 'auth', 
@@ -139,7 +141,7 @@ Class Example extends \KMF\Controller{
                    array(
                       'controller' => 'error'
                    )
-                ); //Automated Redirection Method, If no action is mentioned it redirect to index() of controller
+                ); //Automated Redirection Method
 
     /* Pass variable to Views */
     $this->view->varName = varValue;
