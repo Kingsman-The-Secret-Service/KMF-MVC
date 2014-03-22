@@ -1,11 +1,9 @@
 KMF-MVC
 =======
-
 <p>KMF-MVC is a Lightweight PHP MVC which is developed based upon ORM - PHP ActiveRecord & Template Engine - Twig.</p>
 <hr/>
 
-
-##Requirements
+##Required Libraries
 - PHP ORM : [PHP ActiveRecord] (http://www.phpactiverecord.org/)
 - Template Engine : [Twig] (http://twig.sensiolabs.org)
  
@@ -40,11 +38,9 @@ themes/
         charts.html
         forms.html
 ```
-<hr/>
-
-##Configuration & Examples
-
-####.htaccess
+##Examples
+###Your Application 
+######.htaccess
 ```htaccess
 Options +FollowSymLinks
 IndexIgnore */*
@@ -56,8 +52,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^([^/]+)(?:/([^/]+)|)(?:/?([^*]+)|) index.php?controller=$1&action=$2 [QSA,NC,L]
 ```
-
-###Your Application 
 ###### index.php
 ```php
 <?php
@@ -68,10 +62,8 @@ $config = __DIR__."/config/config.ini";
 
 include("../Core/KMF/KMF.php");
 new \KMF\Bootstrap($config);
-
 ```
-
-###config
+###Configuration
 ###### config/config.ini
 ```ini
 APPNAMESPACE = Your_Application_Namespace
@@ -100,7 +92,6 @@ user[logout] = logout
 dashboard[index] = Home
 dashboard[chart] = Charts
 ```
-
 ###Model 
 ######models/example.model.php (For more info [PHP Active Record] (http://www.phpactiverecord.org/))
 ```php
@@ -113,9 +104,7 @@ Class example extends \ActiveRecord\Model{
   static $table_name = 'users';
 
 }
-
 ```
-
 ###Controller 
 ######controllers/example.ctrl.php
 ```php
@@ -135,7 +124,23 @@ Class Example extends \KMF\Controller{
   
     $params = $this->dispatcher->getParams(); // Get all the request passed through URL i.e $_GET
     $menu = $this->menu(); // Get all menu configured in config.ini file
+    $url = $this->url(
+              array(
+                'controller' => 'auth', 
+                'action' => 'login', 
+                'params' => array(
+                              'title' => 'Login', 
+                              'error' => 'Invalid User'
+                            )
+               )
+           ); // Automated URL generating method
     
+    $redirect = $this->redirect(
+                   array(
+                      'controller' => 'error'
+                   )
+                ); //Automated Redirection Method, If no action is mentioned it redirect to index() of controller
+
     /* Pass variable to Views */
     $this->view->varName = varValue;
     $this->view->title = 'Home';
@@ -147,10 +152,16 @@ Class Example extends \KMF\Controller{
   }
 }
 ```
-
 ###View 
 ######themes/[template]/views/[controller]/[action].html  (For more info [Twig] (http://twig.sensiolabs.org))
 ```html
+{{isAjaxRequest}} <!-- View Method to test Ajax request -->
+
+{% if isAjaxRequest == false %}
+   Do something non-ajax call
+{% else %}
+   Do Something else on ajax call
+{% endif %}
 
 {{varName}} <!--Passed by View through Controller-->
 
@@ -159,18 +170,16 @@ Class Example extends \KMF\Controller{
 <h1>{{msg}}</h1> <!-- Message assigned in controller -->
 
 {% if user '' %} <!-- Control Statement -->
-  {{user
+    {{user}}
 {% else %}
-  Hello Guest
+    Hello Guest
 {% endif %}
 
 {% for key,value in arrayFromView %} <!-- loop Statement -->
-  <li><a href = "{{key}}">{{value}}</a>
+   <li><a href = "{{key}}">{{value}}</a>
 {% endfor %}
 ```
-
 <hr/>
-
 
 ##License & Authors
 
