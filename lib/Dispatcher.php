@@ -24,7 +24,7 @@ Class Dispatcher{
 
     private function setController(){
         
-        $controllerDir = $this->registry->appDir.'controller';
+        $controllerDir = $this->registry->appDir.'controllers';
 
         if(is_dir($controllerDir) == FALSE){
 
