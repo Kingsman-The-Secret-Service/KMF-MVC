@@ -17,7 +17,7 @@ Class Autoloader{
     public function controller($class){
         
         $class = $this->trim_namespace($class);
-        set_include_path($this->registry->appDir. '/controller/');
+        set_include_path($this->registry->appDir. '/controllers/');
         spl_autoload_extensions('.ctrl.php');
         spl_autoload($class);
     }
@@ -25,7 +25,7 @@ Class Autoloader{
     public function model($class){
         
         $class = $this->trim_namespace($class);
-        set_include_path($this->registry->appDir. '/model/');
+        set_include_path($this->registry->appDir. '/models/');
         spl_autoload_extensions('.model.php');
         spl_autoload($class);
     }
@@ -33,7 +33,7 @@ Class Autoloader{
     public function helper($class){
         
         $class = $this->trim_namespace($class);        
-        set_include_path($this->registry->appDir. '/helper/');
+        set_include_path($this->registry->appDir. '/helpers/');
         spl_autoload_extensions('.help.php');
         spl_autoload($class);
     }
