@@ -185,8 +185,6 @@ Class Example extends \KMF\Controller{
 
 ##License & Authors
 
-<img class="commit-form-avatar js-avatar" width="60" height="60" src="https://avatars2.githubusercontent.com/u/2240650?s=140" data-user="2240650" alt="Kaviarasan K K"></img>
-
 *Kaviarasan K K* [(kaviarasankk@gmail.com)] (mailto:kaviarasankk@gmail.com)  
 
 ```
