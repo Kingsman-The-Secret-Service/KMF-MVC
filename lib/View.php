@@ -42,6 +42,34 @@ Class View {
         \Twig_Autoloader::register();
         $loader = new \Twig_Loader_Filesystem($this->getTemplate());
         $twig = new \Twig_Environment($loader);
+        
+        $urlFunction = new \Twig_SimpleFunction('url', function ($ctrl_action, $paramsArray = NULL) {
+            
+            $ctrl_action = explode('_', $ctrl_action);
+            $controller = $ctrl_action[0].'/';
+            $action = $ctrl_action[1].'/';
+            
+            $params = '';
+            if(isset($paramsArray)){
+
+                $params .= '?';
+                foreach ($paramsArray as $key => $value){
+
+                    $params .= $key.'='.$value;
+
+                    if(end($paramsArray) != $value){
+
+                        $params .= '&';
+                    }
+                }
+            }
+        
+            $url =  $this->registry->siteUrl.$controller.$action.$params;        
+            return $url;
+        });
+        
+        $twig->addFunction($urlFunction);
+        
         $template = $twig->loadTemplate($this->getView());
 
         return $template;
