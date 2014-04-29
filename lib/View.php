@@ -45,7 +45,7 @@ Class View {
         
         $urlFunction = new \Twig_SimpleFunction('url', function ($ctrl_action, $paramsArray = NULL) {
             
-            $ctrl_action = explode('_', $ctrl_action);
+            $ctrl_action = explode('/', $ctrl_action);
             $controller = $ctrl_action[0].'/';
             $action = $ctrl_action[1].'/';
             
