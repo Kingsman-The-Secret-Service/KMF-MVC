@@ -37,6 +37,7 @@ themes/
         index.html
         charts.html
         forms.html
+        data.json
 ```
 ##Examples
 ###Your Application 
